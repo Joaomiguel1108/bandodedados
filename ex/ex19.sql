@@ -1,0 +1,180 @@
+/*O Hospital São João está organizando suas informações em um sistema digital. 
+O hospital possui cinco tabelas principais para gerenciar os dados dos pacientes, 
+médicos, especialidades, atendimentos e prescrições. 
+O diretor de TI do hospital solicitou algumas informações para melhorar o 
+planejamento e o gerenciamento da unidade. Ele precisa das seguintes listas: 
+1. Pacientes com Atendimentos: Ele quer saber o nome de cada paciente 
+que passou por algum atendimento e quais médicos o atenderam. 
+2. Todos os Pacientes: Ele quer uma lista completa de todos os pacientes, 
+incluindo os atendimentos que receberam e deixar claro quando algum 
+paciente não passou por nenhum atendimento. 
+3. Médicos e Pacientes: Ele quer saber quais médicos atenderam quais 
+pacientes. Caso algum médico não tenha realizado atendimentos, isso 
+deve ser evidenciado. 
+4. Pacientes e Prescrições: O diretor gostaria de ver a lista de todos os 
+pacientes e as prescrições médicas feitas durante os atendimentos. 
+5. Especialidades e Médicos: Ele quer saber quais médicos estão 
+alocados em quais especialidades. */
+
+CREATE DATABASE hospital;
+USE hospital;
+
+CREATE TABLE pacientes (
+    id_paciente INT PRIMARY KEY,
+    nome VARCHAR(100),
+    data_nascimento DATE,
+    endereco VARCHAR(150)
+);
+
+CREATE TABLE medicos (
+    id_medico INT PRIMARY KEY,
+    nome_medico VARCHAR(100),
+    id_especialidade INT
+);
+
+CREATE TABLE especialidades (
+    id_especialidade INT PRIMARY KEY,
+    nome_especialidade VARCHAR(100)
+);
+
+CREATE TABLE atendimentos (
+    id_atendimento INT PRIMARY KEY,
+    id_paciente INT,
+    id_medico INT,
+    data_atendimento DATE,
+    tipo_atendimento VARCHAR(50),
+    FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente),
+    FOREIGN KEY (id_medico) REFERENCES medicos(id_medico)
+);
+
+CREATE TABLE prescricoes (
+    id_prescricao INT PRIMARY KEY,
+    id_atendimento INT,
+    medicamento VARCHAR(100),
+    dosagem VARCHAR(50),
+    FOREIGN KEY (id_atendimento) REFERENCES atendimentos(id_atendimento)
+);
+
+INSERT INTO prescricoes VALUES
+(1, 1, 'Paracetamol', '500mg'),
+(2, 2, 'Amoxicilina', '250mg'),
+(3, 3, 'Ibuprofeno', '400mg'),
+(4, 4, 'Dipirona', '500mg');
+
+INSERT INTO atendimentos VALUES
+(1, 1, 1, '2023-06-10', 'Emergência'),
+(2, 2, 2, '2023-07-01', 'Consulta'),
+(3, 3, 3, '2023-05-15', 'Emergência'),
+(4, 4, 4, '2023-08-20', 'Consulta');
+
+INSERT INTO especialidades VALUES
+(1, 'Cardiologia'),
+(2, 'Pediatria'),
+(3, 'Ortopedia');
+
+INSERT INTO medicos VALUES
+(1, 'Dr. Marcos Pereira', 1),
+(2, 'Dr. Ana Souza', 2),
+(3, 'Dr. Beatriz Lima', 3),
+(4, 'Dr. Carlos Silva', 1),
+(5, 'Dr. Paula Fernandes', 2);
+
+INSERT INTO pacientes VALUES
+(1, 'João Silva', '1985-03-20', 'Rua A, 123, São Paulo'),
+(2, 'Maria Oliveira', '1990-07-15', 'Rua B, 456, Rio de Janeiro'),
+(3, 'Pedro Santos', '1982-11-05', 'Rua C, 789, Belo Horizonte'),
+(4, 'Ana Costa', '1995-02-28', 'Rua D, 101, Curitiba');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
